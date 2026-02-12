@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adarsh Browser - Ultra Aesthetic Web Browser</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/glassmorphism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <div class="logo-animation">
+                    <div class="logo-glow"></div>
+                    <h1 class="logo-text">ADARSH BROWSER</h1>
+                </div>
+                <p class="welcome-subtitle">Next-Generation Ultra Aesthetic Web Browser</p>
+                <p class="welcome-subtitle" style="font-size: 1rem; color: #b0b0b0;">Developed by Adarsh Jaiswal</p>
+                <a href="https://www.instagram.com/adar.xhevil" target="_blank" class="social-link">📱 Instagram: @adar.xhevil</a>
+                <button class="enter-btn" onclick="enterBrowser()">Enter Browser ➜</button>
+            </div>
+        </div>
+
+        <!-- Browser -->
+        <div class="browser-container" id="browserContainer" style="display: none;">
+            <!-- Header -->
+            <header class="browser-header">
+                <div class="header-content">
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="goBack()" title="Back">←</button>
+                        <button class="nav-btn" onclick="goForward()" title="Forward">→</button>
+                        <button class="nav-btn" onclick="reloadPage()" title="Reload">↻</button>
+                    </div>
+
+                    <div class="address-bar-container">
+                        <select id="searchEngine" class="search-engine">
+                            <option value="google">🔍 Google</option>
+                            <option value="duckduckgo">🦆 DuckDuckGo</option>
+                            <option value="bing">🔵 Bing</option>
+                        </select>
+                        <input 
+                            type="text" 
+                            id="addressBar" 
+                            class="address-bar"
+                            placeholder="Search or enter URL..."
+                            onkeypress="handleAddressBarKey(event)"
+                        >
+                        <button class="voice-btn" onclick="playSound('success')">🎤</button>
+                    </div>
+
+                    <div class="header-controls">
+                        <button class="control-btn" onclick="toggleAI()">🤖</button>
+                        <button class="control-btn" onclick="toggleDarkMode()">
+                            <span id="themeIcon">🌙</span>
+                        </button>
+                        <button class="control-btn" onclick="toggleMenu()">☰</button>
+                    </div>
+                </div>
+
+                <!-- Tab Bar -->
+                <div class="tab-bar">
+                    <div class="tabs-container" id="tabsContainer"></div>
+                    <button class="new-tab-btn" onclick="createNewTab()">+</button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="browser-main">
+                <!-- Homepage -->
+                <div class="homepage" id="homepage">
+                    <div class="homepage-content">
+                        <h2 class="homepage-title">ADARSH BROWSER</h2>
+                        <div class="search-input-group">
+                            <input 
+                                type="text" 
+                                id="homepageSearch"
+                                class="search-input"
+                                placeholder="Search the web..."
+                                onkeypress="if(event.key==='Enter') submitHomepageSearch()"
+                            >
+                            <button class="search-btn" onclick="submitHomepageSearch()">Search</button>
+                        </div>
+
+                        <div class="quick-stats">
+                            <div class="stat-card">
+                                <span class="stat-icon">📑</span>
+                                <span class="stat-text" id="tabCount">1 Tab</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">⭐</span>
+                                <span class="stat-text" id="bookmarkCount">0 Bookmarks</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">📜</span>
+                                <span class="stat-text" id="historyCount">0 History</span>
+                            </div>
+                        </div>
+
+                        <div class="quick-actions">
+                            <button class="action-btn" onclick="toggleBookmarks()">⭐ Bookmarks</button>
+                            <button class="action-btn" onclick="toggleHistory()">📜 History</button>
+                            <button class="action-btn" onclick="toggleDownloads()">⬇️ Downloads</button>
+                            <button class="action-btn" onclick="toggleSettings()">⚙️ Settings</button>
+                        </div>
+                    </div>
+                </div>
+
+                <iframe id="webframe" class="webframe" style="display: none;"></iframe>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <!-- Bookmarks -->
+                    <div class="sidebar-section" id="bookmarksSection" style="display: none;">
+                        <h3 class="sidebar-title">⭐ Bookmarks</h3>
+                        <div class="bookmarks-list" id="bookmarksList"></div>
+                        <button class="sidebar-btn" onclick="addCurrentBookmark()">+ Add</button>
+                    </div>
+
+                    <!-- History -->
+                    <div class="sidebar-section" id="historySection" style="display: none;">
+                        <h3 class="sidebar-title">📜 History</h3>
+                        <div class="history-list" id="historyList"></div>
+                        <button class="sidebar-btn" onclick="clearAllHistory()">Clear</button>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="sidebar-section" id="settingsSection" style="display: none;">
+                        <h3 class="sidebar-title">⚙️ Settings</h3>
+                        <div class="settings-list">
+                            <label><input type="checkbox" checked> Ad Blocker</label>
+                            <label><input type="checkbox" checked> Anti-Tracking</label>
+                            <label><input type="checkbox" checked> Sound Effects</label>
+                        </div>
+                    </div>
+
+                    <!-- AI Chat -->
+                    <div class="sidebar-section" id="aiSection" style="display: none;">
+                        <h3 class="sidebar-title">🤖 AI Assistant</h3>
+                        <div class="chat-messages" id="chatMessages"></div>
+                        <div class="chat-input-group">
+                            <input 
+                                type="text" 
+                                id="chatInput"
+                                class="chat-input"
+                                placeholder="Ask me..."
+                                onkeypress="if(event.key==='Enter') sendChatMessage()"
+                            >
+                            <button class="chat-send" onclick="sendChatMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Menu -->
+            <div class="menu-dropdown" id="menuDropdown" style="display: none;">
+                <div class="menu-item" onclick="togglePrivateMode()">🔒 Private Mode</div>
+                <div class="menu-item" onclick="toggleFullscreen()">⛶ Fullscreen</div>
+                <hr class="menu-divider">
+                <div class="menu-item" onclick="showAbout()">ℹ️ About</div>
+                <div class="menu-item" onclick="exitBrowser()">❌ Exit</div>
+            </div>
+
+            <!-- Notification -->
+            <div class="notification" id="notification"></div>
+
+            <!-- Footer -->
+            <footer class="browser-footer">
+                <p>Developed by Adarsh Jaiswal | <a href="https://www.instagram.com/adar.xhevil" target="_blank">@adar.xhevil</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/bookmarks.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/browser.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

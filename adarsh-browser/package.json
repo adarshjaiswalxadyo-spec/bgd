@@ -1,0 +1,60 @@
+{
+  "name": "adarsh-browser",
+  "version": "1.0.0",
+  "description": "Next-generation ultra aesthetic web browser by Adarsh Jaiswal",
+  "main": "backend/main.js",
+  "homepage": "./",
+  "author": "Adarsh Jaiswal",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adarshjaiswalxadyo-spec/adarsh-browser.git"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-exe": "electron-builder --win --publish never",
+    "build-portable": "electron-builder --win portable --publish never",
+    "build-installer": "electron-builder --win nsis --publish never"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.adarshbrowser.app",
+    "productName": "Adarsh Browser",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "backend/**/*",
+      "frontend/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Adarsh Browser"
+    }
+  }
+}

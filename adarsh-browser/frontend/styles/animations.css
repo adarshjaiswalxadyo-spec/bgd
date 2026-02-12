@@ -1,0 +1,63 @@
+/* Animations */
+
+@keyframes tabHighlight {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    transform: scale(0.98);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    transform: scale(1);
+  }
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 10px #00d9ff,
+                 0 0 20px #00d9ff,
+                 0 0 30px #00d9ff;
+  }
+  20%, 24%, 55% {
+    text-shadow: 0 0 5px #00d9ff;
+  }
+}
+
+@keyframes colorShift {
+  0%, 100% { color: #00d9ff; }
+  50% { color: #ff006e; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.tab.active {
+  animation: tabHighlight 0.4s ease-out;
+}
+
+.neon-text {
+  animation: neonFlicker 0.3s infinite;
+}
+
+.color-shift {
+  animation: colorShift 3s ease-in-out infinite;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}

@@ -1,0 +1,49 @@
+/* Glassmorphism Effects */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.neon-border {
+  border: 1px solid #00d9ff;
+  box-shadow: 0 0 10px #00d9ff,
+              inset 0 0 10px rgba(0, 217, 255, 0.1);
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(143, 0, 255, 0.1));
+}
+
+.blur-sm {
+  backdrop-filter: blur(5px);
+}
+
+.blur-md {
+  backdrop-filter: blur(10px);
+}
+
+.blur-lg {
+  backdrop-filter: blur(20px);
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: #ffffff;
+}
