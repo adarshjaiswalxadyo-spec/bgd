@@ -1,6 +1,6 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcMain } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  platform: process.platform,
-  appVersion: '1.0.0'
+  openURL: (url) => ipcMain.invoke('open-url', url),
+  closeApp: () => ipcMain.invoke('close-app')
 });
